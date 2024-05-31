@@ -42,7 +42,17 @@ class SummarizeMixin:
         return response
 
     def chunked_summarize(self, content: str, max_tokens: int = 4096, instruction_hint: str = '') -> str:
-        num_tokens = self.summarize_chain.llm.get_num_tokens(content)
+        import tiktoken
+
+        enc = tiktoken.encoding_for_model("gpt-4")
+
+        # encode the text using the GPT-3.5-Turbo encoder
+        tokenized_text = enc.encode(text)
+
+        # calculate the number of tokens in the encoded text
+        num_tokens = len(tokenized_text)
+        
+        # num_tokens = self.summarize_chain.llm.get_num_tokens(content)
 
         if num_tokens > max_tokens:
             avg_chars_per_token = len(content) / num_tokens
