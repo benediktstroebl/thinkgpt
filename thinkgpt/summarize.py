@@ -47,7 +47,7 @@ class SummarizeMixin:
         enc = tiktoken.encoding_for_model("gpt-4")
 
         # encode the text using the GPT-3.5-Turbo encoder
-        tokenized_text = enc.encode(text)
+        tokenized_text = enc.encode(content)
 
         # calculate the number of tokens in the encoded text
         num_tokens = len(tokenized_text)
