@@ -3,6 +3,7 @@ import textwrap
 from pydantic.config import Extra
 import warnings
 from typing import Dict, List, Any
+import tiktoken
 
 from langchain import PromptTemplate, LLMChain
 from langchain.llms import OpenAI, BaseLLM
@@ -42,7 +43,6 @@ class SummarizeMixin:
         return response
 
     def chunked_summarize(self, content: str, max_tokens: int = 4096, instruction_hint: str = '') -> str:
-        import tiktoken
 
         enc = tiktoken.encoding_for_model("gpt-4")
 
